@@ -1,0 +1,9 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+html, body, #root { height: 100%; }
+
+line8 { color: #95C11F;}
+line22 { color: #A69DCD;}
+lineN3 { color: #E6007E;}

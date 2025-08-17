@@ -1,0 +1,22 @@
+services:
+  backend:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+    container_name: busestra-backend
+    environment:
+      - PORT=8080
+    expose:
+      - "8080"          # vain sisäverkkoon, ei julkaista hostille
+    restart: unless-stopped
+
+  frontend:
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile
+    container_name: busestra-frontend
+    depends_on:
+      - backend
+    ports:
+      - "8080:80"       # avaa selaimelle http://localhost:8080
+    restart: unless-stopped
