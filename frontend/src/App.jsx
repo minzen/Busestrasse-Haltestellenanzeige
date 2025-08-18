@@ -1,7 +1,7 @@
 import { useEffect, useState, useMemo } from "react";
 import Clock from "./components/Clock";
 
-const STOP_ID = "9013799"; // Busestr.
+const STOP_ID = "9013703"; // Busestr.
 
 function MinutesLeft({ iso }) {
   const [mins, setMins] = useState(0);
@@ -30,12 +30,67 @@ function Row({ r }) {
 
   const line = r.line?.name ?? r.line; // "8", "22", "N3"...
   const lineBg = {
+    "1": "bg-[#009640]",
+    "2": "bg-[#005ca9]",
+    "3": "bg-[#009fe3]",
+    "4": "bg-[#e30613]",
+    "5": "bg-[#009db1]",
+    "6": "bg-[#ffcc00]",// musta fontti
     "8": "bg-[#95C11F]",
+    "10": "bg-[#312783]",
+    "14": "bg-[#95C11F]",
+    "20": "bg-[#95C11F]",
+    "21": "bg-[#009fe3]",
     "22": "bg-[#A69DCD]",
-    "N3": "bg-[#E6007E]"
+    "22E": "bg-[#A69DCD]",
+    "23": "bg-[#005ca9]",
+    "24": "bg-[#951b81]",
+    "25": "bg-[#009640]",
+    "26": "bg-[#e30613]",
+    "27": "bg-[#ef7d00]",
+    "28": "bg-[#ffcc00]",// musta fontti
+    "29": "bg-[#95C11F]",
+    "31": "bg-[#95C11F]",
+    "33": "bg-[#ffcc00]",// musta fontti
+    "34": "bg-[#ffcc00]",// musta fontti
+    "37": "bg-[#951b81]",
+    "38": "bg-[#ffcc00]",// musta fontti
+    "39": "bg-[#ffcc00]",// musta fontti
+    "40": "bg-[#e30613]",
+    "41": "bg-[#e30613]",
+    "44": "bg-[#ef7d00]",
+    "52": "bg-[#95C11F]",
+    "55": "bg-[#ffcc00]",// musta fontti
+    "57": "bg-[#ef7d00]",
+    "58": "bg-[#ef7d00]",
+    "61": "bg-[#009fe3]",
+    "62": "bg-[#009640]",
+    "63": "bg-[#312783]",
+    "65": "bg-[#95C11F]",
+    "66": "bg-[#95C11F]",
+    "67": "bg-[#ffcc00]",// musta fontti
+    "80": "bg-[#95C11F]",
+    "81": "bg-[#009640]",
+    "82": "bg-[#ef7d00]",
+    "90": "bg-[#312783]",
+    "93": "bg-[#ffcc00]",// musta fontti
+    "94": "bg-[#e30613]",
+    "95": "bg-[#ef7d00]",
+    "96": "bg-[#951b81]",
+    "98": "bg-[#009640]",
+    "N1": "bg-[#009640]",
+    "N3": "bg-[#E6007E]",
+    "N4": "bg-[#e30613]",
+    "N5": "bg-[#ef7d00]",
+    "N6": "bg-[#009fe3]",
+    "N7": "bg-[#95C11F]",
+    "N9": "bg-[#ffcc00]",// musta fontti
+    "N10": "bg-[#009fe3]",
+    "N94": "bg-[#A69DCD]",
+
   };
   const badgeClass = `inline-flex items-center justify-center w-10 h-10 rounded-xl text-lg font-bold
-                    ${lineBg[line] ?? "bg-[#9d9d9d]"} ${line === "22" ? "text-black" : "text-white"}`;
+                    ${lineBg[line] ?? "bg-[#9d9d9d]"} ${line === "6" || line === "28" || line === "33" || line === "34" || line === "38" || line === "39" || line === "55" || line === "67" || line === "93" || line === "N9" ? "text-black" : "text-white"}`;
 
   return (
     <li className="flex items-center justify-between py-4 border-b">
@@ -107,7 +162,7 @@ export default function App() {
 
       <main className="max-w-4xl mx-auto p-4">
         {err && <div className="p-3 bg-yellow-100 rounded-xl mb-3">{err}</div>}
-        {loading && <div className="p-3">Ladataan…</div>}
+        {loading && <div className="p-3">Es wird geladen...</div>}
         {(!loading && rows.length === 0) ? (
           <div className="p-3 text-center text-gray-500">Derzeit leider keine Fahrten</div>
         ) : (

@@ -11,7 +11,7 @@ function Clock() {
 
   return (
     <div className="text-right text-xl font-mono">
-      {now.toLocaleTimeString([], { hour: "2-digit", minute: "2-digit" })}
+      {now.toLocaleDateString([], { hour: "2-digit", minute: "2-digit" })}
     </div>
   );
 }
