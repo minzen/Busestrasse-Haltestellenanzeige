@@ -166,9 +166,16 @@ export default function App() {
         {(!loading && rows.length === 0) ? (
           <div className="p-3 text-center text-gray-500">Derzeit leider keine Fahrten. Für die Nachtlinien bitte den Fahrplan prüfen!</div>
         ) : (
-          <ul>
-            {rows.map((r, i) => <Row key={i} r={r} />)}
-          </ul>
+          <>
+            <div className="text-right">
+              <div className="text-xs text-gray-500 mb-1 uppercase tracking-wide">
+                Abfahrt in
+              </div>
+            </div>
+            <ul>
+              {rows.map((r, i) => <Row key={i} r={r} />)}
+            </ul>
+          </>
         )}      </main>
     </div>
   );
