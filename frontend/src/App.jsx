@@ -1,7 +1,7 @@
 import { useEffect, useState, useMemo } from "react";
 import Clock from "./components/Clock";
 
-const STOP_ID = "9013703"; // Busestr.
+const STOP_ID = "9013799"; // Busestr.
 
 function MinutesLeft({ iso }) {
   const [mins, setMins] = useState(0);
@@ -162,9 +162,9 @@ export default function App() {
 
       <main className="max-w-4xl mx-auto p-4">
         {err && <div className="p-3 bg-yellow-100 rounded-xl mb-3">{err}</div>}
-        {loading && <div className="p-3">Es wird geladen...</div>}
+        {loading && <div className="p-3">Lädt...</div>}
         {(!loading && rows.length === 0) ? (
-          <div className="p-3 text-center text-gray-500">Derzeit leider keine Fahrten</div>
+          <div className="p-3 text-center text-gray-500">Derzeit leider keine Fahrten. Für die Nachtlinien bitte den Fahrplan prüfen!</div>
         ) : (
           <ul>
             {rows.map((r, i) => <Row key={i} r={r} />)}
