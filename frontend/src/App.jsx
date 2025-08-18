@@ -1,7 +1,11 @@
-import { useEffect, useState, useMemo } from "react";
+import { useEffect, useRef, useState, useMemo } from "react";
+import StopPicker from "./components/StopPicker";
 import Clock from "./components/Clock";
 
-const STOP_ID = "9013799"; // Busestr.
+const STOPS = [
+   { id: "9013799", label: "Busestr. (9013799)" },
+  { id: "9013703", label: "Am Stern (9013703)" },
+];
 
 function MinutesLeft({ iso }) {
   const [mins, setMins] = useState(0);
@@ -126,13 +130,17 @@ function Row({ r }) {
 }
 
 export default function App() {
+  const defaultStop = localStorage.getItem("stopId") || STOPS[0].id;
+  const [stopId, setStopId] = useState(defaultStop);
   const [rows, setRows] = useState([]);
   const [err, setErr] = useState("");
   const [loading, setLoading] = useState(true);
 
-  async function load() {
+  const pollRef = useRef(null);
+
+  async function load(currentStopId = stopId) {
     try {
-      const rsp = await fetch(`/api/bsag/departures?stopId=${STOP_ID}&limit=30`);
+      const rsp = await fetch(`/api/bsag/departures?stopId=${currentStopId}&limit=30`);
       if (!rsp.ok) throw new Error(await rsp.text());
       const data = await rsp.json();
       setRows(data.items ?? []);
@@ -144,20 +152,36 @@ export default function App() {
     }
   }
 
+ // Käynnistä pollaus
   useEffect(() => {
-    load();
-    const id = setInterval(load, 15000);
-    return () => clearInterval(id);
-  }, []);
+    // ensimmäinen haku heti
+    load(stopId);
+    // 15 s välein
+    pollRef.current = setInterval(() => load(stopId), 15000);
+    return () => clearInterval(pollRef.current);
+    // HUOM: riippuvuutena stopId, jotta interval nollautuu pysäkin vaihtuessa
+  }, [stopId]);
+
+  // Kun käyttäjä vaihtaa pysäkin
+  function handleStopChange(newId) {
+    setStopId(newId);
+    localStorage.setItem("stopId", newId);
+    setLoading(true);
+    // tee välitön haku uuteen pysäkkiin
+    load(newId);
+    // interval nollautuu useEffectissä
+  }
 
   return (
     <div className="min-h-screen bg-white text-gray-900">
       <header className="bg-red-600 text-white p-4 shadow">
         <div className="max-w-4xl mx-auto flex items-center gap-3">
-          <div className="rounded-full bg-white/10 px-3 py-1 text-sm">Haltestelle</div>
-          <h1 className="text-2xl font-bold">Busestr.</h1>
         </div>
-        <Clock />
+         <div className="flex items-center gap-4">
+            <StopPicker value={stopId} onChange={handleStopChange} stops={STOPS} />
+            <div>&nbsp;</div>
+            <Clock />
+          </div>
       </header>
 
       <main className="max-w-4xl mx-auto p-4">
