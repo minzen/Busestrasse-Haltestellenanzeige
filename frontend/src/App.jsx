@@ -34,7 +34,7 @@ const STOPS = [
 ];
 
 // Sort the array by the label
-STOPS.sort(function(a, b) {
+STOPS.sort(function (a, b) {
   const textA = a.label.toUpperCase();
   const textB = b.label.toUpperCase();
   return (textA < textB) ? -1 : (textA > textB) ? 1 : 0;
@@ -187,7 +187,7 @@ export default function App() {
     }
   }
 
- // Käynnistä pollaus
+  // Käynnistä pollaus
   useEffect(() => {
     // ensimmäinen haku heti
     load(stopId);
@@ -212,11 +212,11 @@ export default function App() {
       <header className="bg-red-600 text-white p-4 shadow">
         <div className="max-w-4xl mx-auto flex items-center gap-3">
         </div>
-         <div className="flex items-center gap-4">
-            <StopPicker value={stopId} onChange={handleStopChange} stops={STOPS} />
-            <div>&nbsp;</div>
-            <Clock />
-          </div>
+        <div className="flex items-center gap-4">
+          <StopPicker value={stopId} onChange={handleStopChange} stops={STOPS} />
+          <div>&nbsp;</div>
+          <Clock />
+        </div>
       </header>
 
       <main className="max-w-4xl mx-auto p-4">
@@ -232,8 +232,14 @@ export default function App() {
               </div>
             </div>
             <ul>
-              {rows.map((r, i) => <Row key={i} r={r} />)}
-            </ul>
+              {rows
+                .slice() // kopio ettei mutatoida alkuperäistä
+                .sort((a, b) => {
+                  const ta = new Date(a.realTime || a.plannedTime);
+                  const tb = new Date(b.realTime || b.plannedTime);
+                  return ta - tb;
+                })
+                .map((r, i) => <Row key={i} r={r} />)}            </ul>
           </>
         )}      </main>
     </div>
