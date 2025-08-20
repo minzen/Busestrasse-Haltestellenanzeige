@@ -28,6 +28,9 @@ const STOPS = [
   { id: "9014124", label: "Parkstr." },
   { id: "9014253", label: "Verdunstr." },
   { id: "9013715", label: "Arensburgstr." },
+  { id: "9013876", label: "Friedrich-Mißler-Str." },
+  { id: "9013729", label: "August-Bebel-Allee" },
+  { id: "9014043", label: "Loignystr." },
 ];
 
 // Sort the array by the label
@@ -65,11 +68,13 @@ function Row({ r }) {
   const line = r.line?.name ?? r.line; // "8", "22", "N3"...
   const lineBg = {
     "1": "bg-[#009640]",
+    "1E": "bg-[#009640]",
     "2": "bg-[#005ca9]",
     "3": "bg-[#009fe3]",
     "4": "bg-[#e30613]",
     "5": "bg-[#009db1]",
     "6": "bg-[#ffcc00]",// musta fontti
+    "6E": "bg-[#ffcc00]",// musta fontti
     "8": "bg-[#95C11F]",
     "10": "bg-[#312783]",
     "14": "bg-[#95C11F]",
@@ -124,7 +129,7 @@ function Row({ r }) {
 
   };
   const badgeClass = `inline-flex items-center justify-center w-10 h-10 rounded-xl text-lg font-bold
-                    ${lineBg[line] ?? "bg-[#9d9d9d]"} ${line === "6" || line === "28" || line === "33" || line === "34" || line === "38" || line === "39" || line === "55" || line === "67" || line === "93" || line === "N9" ? "text-black" : "text-white"}`;
+                    ${lineBg[line] ?? "bg-[#9d9d9d]"} ${line === "6" || line === "6E" || line === "28" || line === "33" || line === "34" || line === "38" || line === "39" || line === "55" || line === "67" || line === "93" || line === "N9" ? "text-black" : "text-white"}`;
 
   return (
     <li className="flex items-center justify-between py-4 border-b">
