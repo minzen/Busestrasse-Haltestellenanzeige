@@ -213,7 +213,7 @@ export default function App() {
       <header className="bg-red-600 text-white p-4 shadow">
         <div className="max-w-4xl mx-auto flex items-center gap-3">
         </div>
-        <div className="flex items-center gap-4">
+        <div className="flex items-center gap-6">
           <StopPicker value={stopId} onChange={handleStopChange} stops={STOPS} />
           <WeatherWidget />
           <Clock />
