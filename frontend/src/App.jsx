@@ -1,6 +1,7 @@
 import { useEffect, useRef, useState, useMemo } from "react";
 import StopPicker from "./components/StopPicker";
 import Clock from "./components/Clock";
+import WeatherWidget from "./components/WeatherWidget";
 
 const STOPS = [
   { id: "9013799", label: "Busestraße" },
@@ -214,7 +215,7 @@ export default function App() {
         </div>
         <div className="flex items-center gap-4">
           <StopPicker value={stopId} onChange={handleStopChange} stops={STOPS} />
-          <div>&nbsp;</div>
+          <WeatherWidget />
           <Clock />
         </div>
       </header>
