@@ -1,19 +1,14 @@
 import { useState, useEffect } from "react";
 
-function Clock() {
+export default function Clock({ format = "HH:mm", className = "" }) {
   const [now, setNow] = useState(new Date());
-
-  useEffect(() => {
-    // päivitä minuutin alussa
-    const id = setInterval(() => setNow(new Date()), 1000);
-    return () => clearInterval(id);
-  }, []);
-
-  return (
-    <div className="text-right text-l">
-      {now.toLocaleDateString([], { hour: "2-digit", minute: "2-digit" })}
-    </div>
-  );
+  useEffect(() => { const id = setInterval(() => setNow(new Date()), 30000); return () => clearInterval(id); }, []);
+  const text = new Intl.DateTimeFormat(undefined, {
+    day: format.includes("dd") ? "2-digit" : undefined,
+    month: format.includes("MM") ? "2-digit" : undefined,
+    year: format.includes("yyyy") ? "numeric" : undefined,
+    hour: "2-digit",
+    minute: "2-digit",
+  }).format(now);
+  return <div className={className}>{text}</div>;
 }
-
-export default Clock;

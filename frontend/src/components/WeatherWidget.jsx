@@ -14,7 +14,7 @@ const WMO_ICON = (code) => {
   return "🌡️";
 };
 
-export default function WeatherWidget() {
+export default function WeatherWidget( {compact = false}) {
   const [state, setState] = useState({
     ready: false,
     temp: null,
@@ -101,9 +101,9 @@ export default function WeatherWidget() {
       <button
         onClick={enableLocation}
         className="bg-white/10 hover:bg-white/20 text-white text-sm px-3 py-1 rounded-lg"
-        title="Näytä paikallinen sää"
+        title="Das lokale Wetter anzeigen"
       >
-        Näytä sää
+        Wetter anzeigen
       </button>
     );
   }
@@ -112,13 +112,14 @@ export default function WeatherWidget() {
     return <div className="text-xs text-white/80">Sää: {state.err}</div>;
   }
 
-  return (
-    <div className="flex items-center gap-2 text-white">
-      <span className="text-xl" aria-hidden>{WMO_ICON(state.code)}</span>
+return (
+    <div className="flex items-center gap-1 sm:gap-2 text-white">
+      <span className="text-lg sm:text-xl" aria-hidden>{WMO_ICON(state.code)}</span>
       <span className="text-sm">
         {state.temp !== null ? `${state.temp}°C` : "--"}
-        {state.wind !== null ? ` · ${state.wind} m/s` : ""}
+        {!compact && state.wind !== null && (
+          <span className="hidden sm:inline"> · {state.wind} m/s</span>
+        )}
       </span>
     </div>
-  );
-}
+  );}

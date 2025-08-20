@@ -2,6 +2,7 @@ import { useEffect, useRef, useState, useMemo } from "react";
 import StopPicker from "./components/StopPicker";
 import Clock from "./components/Clock";
 import WeatherWidget from "./components/WeatherWidget";
+import Header from "./layout/Header";
 
 const STOPS = [
   { id: "9013799", label: "Busestraße" },
@@ -210,16 +211,10 @@ export default function App() {
 
   return (
     <div className="min-h-screen bg-white text-gray-900">
-      <header className="bg-red-600 text-white p-4 shadow">
-        <div className="max-w-4xl mx-auto flex items-center gap-3">
-        </div>
-        <div className="flex items-center gap-6">
-          <StopPicker value={stopId} onChange={handleStopChange} stops={STOPS} />
-          <WeatherWidget />
-          <Clock />
-        </div>
-      </header>
-
+      <Header
+        stopId={stopId}
+        onStopChange={handleStopChange}
+        stops={STOPS} />
       <main className="max-w-4xl mx-auto p-4">
         {err && <div className="p-3 bg-yellow-100 rounded-xl mb-3">{err}</div>}
         {loading && <div className="p-3">Lädt...</div>}
