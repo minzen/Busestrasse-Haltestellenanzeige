@@ -3,9 +3,39 @@ import StopPicker from "./components/StopPicker";
 import Clock from "./components/Clock";
 
 const STOPS = [
-   { id: "9013799", label: "Busestr. (9013799)" },
-  { id: "9013703", label: "Am Stern (9013703)" },
+  { id: "9013799", label: "Busestraße" },
+  { id: "9013703", label: "Am Stern" },
+  { id: "9013768", label: "Hauptbahnhof-Nord/Messe" },
+  { id: "9013779", label: "Brahmsstraße" },
+  { id: "9013791", label: "Bulthauptstr." },
+  { id: "9013814", label: "Crüsemannallee" },
+  { id: "9014022", label: "Kulenkampffallee" },
+  { id: "9013804", label: "Bürgerpark" },
+  { id: "9014123", label: "Parkallee" },
+  { id: "9014082", label: "Munte" },
+  { id: "9014148", label: "Riensberg" },
+  { id: "9014306", label: "Wätjenstraße" },
+  { id: "9013847", label: "Emmastraße" },
+  { id: "9013909", label: "H.-H.-Meier-Allee" },
+  { id: "9013987", label: "Joseph-Haydn-Str." },
+  { id: "9013803", label: "Bürgermeister-Spitta-Allee" },
+  { id: "9013866", label: "Focke-Museum" },
+  { id: "9013873", label: "Friedhofstr." },
+  { id: "9014001", label: "Kirchbachstr." },
+  { id: "9014072", label: "Metzer Str." },
+  { id: "9014200", label: "St.-Joseph-Stift" },
+  { id: "9013964", label: "Hollerallee" },
+  { id: "9014124", label: "Parkstr." },
+  { id: "9014253", label: "Verdunstr." },
+  { id: "9013715", label: "Arensburgstr." },
 ];
+
+// Sort the array by the label
+STOPS.sort(function(a, b) {
+  const textA = a.label.toUpperCase();
+  const textB = b.label.toUpperCase();
+  return (textA < textB) ? -1 : (textA > textB) ? 1 : 0;
+});
 
 function MinutesLeft({ iso }) {
   const [mins, setMins] = useState(0);
