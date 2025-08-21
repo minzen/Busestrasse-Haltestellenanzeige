@@ -33,6 +33,10 @@ const STOPS = [
   { id: "9013876", label: "Friedrich-Mißler-Str." },
   { id: "9013729", label: "August-Bebel-Allee" },
   { id: "9014043", label: "Loignystr." },
+
+  { id: "9013925", label: "Hauptbahnhof" },
+  { id: "9014183", label: "Schüsselkorb" },
+  { id: "9013830", label: "Domsheide" },
 ];
 
 // Sort the array by the label
@@ -57,7 +61,7 @@ function MinutesLeft({ iso }) {
 }
 
 function Row({ r }) {
-  //console.log('row', r);
+  console.log('row', r);
   const planned = useMemo(() => new Date(r.plannedTime), [r.plannedTime]);
   const realtime = useMemo(
     () => new Date(r.realTime || r.plannedTime),
@@ -68,6 +72,8 @@ function Row({ r }) {
   const mins = Math.max(0, Math.round((realtime - new Date()) / 60000));
 
   const line = r.line?.name ?? r.line; // "8", "22", "N3"...
+  const isTram = r.lineType === "Tram";
+
   const lineBg = {
     "1": "bg-[#009640]",
     "1E": "bg-[#009640]",
@@ -143,15 +149,20 @@ function Row({ r }) {
         <div>
           <div className="text-lg font-medium">{r.headsign ?? "-"}</div>
           <div className="text-sm text-gray-600">
-            Planmäßig{" "}
-            {planned.toLocaleTimeString([], { hour: "2-digit", minute: "2-digit" })}
-            {delayMin !== 0 && (
-              <span className={`ml-2 ${ontime ? "text-green-700" : "text-red-600 font-bold"}`}>
-                {ontime ? "" : `+${delayMin} min`}
-              </span>
+            {!r.cancelled && (
+              <>
+                Planmäßig{" "}
+                {planned.toLocaleTimeString([], { hour: "2-digit", minute: "2-digit" })}
+                {delayMin !== 0 && (
+                  <span className={`ml-2 ${ontime ? "text-green-700" : "text-red-600 font-bold"}`}>
+                    {ontime ? "" : `+${delayMin} min`}
+                  </span>
+                )}
+              </>
             )}
-            {r.cancelled && <span className="ml-2 text-red-600">fällt aus</span>}
-          </div>
+            {r.cancelled && (
+              <span className="ml-2 text-red-600">die Fahrt fällt aus</span>
+            )}          </div>
         </div>
       </div>
       <div className="text-right">
