@@ -1,6 +1,6 @@
 services:
   backend:
-    image:  busestra-backend:1.0.4
+    image:  busestra-backend:1.0.6
     build:
       context: ./backend
       dockerfile: Dockerfile
@@ -13,7 +13,7 @@ services:
     restart: unless-stopped
 
   frontend:
-    image:  busestra-frontend:1.0.4
+    image:  busestra-frontend:1.0.6
     build:
       context: ./frontend
       dockerfile: Dockerfile
