@@ -33,10 +33,33 @@ const STOPS = [
   { id: "9013876", label: "Friedrich-Mißler-Str." },
   { id: "9013729", label: "August-Bebel-Allee" },
   { id: "9014043", label: "Loignystr." },
+  { id: "9013932", label: "Heinrich-Hertz-Str." },
+  { id: "9013780", label: "Brandenburger Str." },
+  { id: "9013750", label: "Barbarossastr." },
+  { id: "9014023", label: "Kurfürstenallee" },
 
+  { id: "9013683", label: "Am Dobben" },
+  { id: "9014141", label: "Rembertistraße" },
   { id: "9013925", label: "Hauptbahnhof" },
+  { id: "9013943", label: "Herdentor" },
   { id: "9014183", label: "Schüsselkorb" },
   { id: "9013830", label: "Domsheide" },
+  { id: "9013858", label: "Falkenstraße" },
+  { id: "9013704", label: "Am Wall" },
+  { id: "9013818", label: "Daniel-von-Büren-Str." },
+  { id: "9013833", label: "Doventorsteinweg" },
+  { id: "9013832", label: "Doventor" },
+  { id: "9014135", label: "Radio Bremen" },
+  { id: "9013680", label: "Am Brill (Hutfilterstr.)" },
+  { id: "9013681", label: "Am Brill (Martinistr.)" },
+  { id: "9014061", label: "Martinistr." },
+  { id: "9014103", label: "Obernstr." },
+  { id: "9014234", label: "Theater am Goetheplatz" },
+  { id: "9014304", label: "Ulrichsplatz" },
+  { id: "9013973", label: "Humboldtstr." },
+
+
+  
 ];
 
 // Sort the array by the label
